@@ -1,0 +1,24 @@
+# ROS2
+COLCON_IGNORE
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# VS Code
+.vscode/*
+!.vscode/*.json
+
+# Compiled files
+*.o
+*.so
+*.a
+
+# IDE
+.idea/
+*.swp
+*.swo
