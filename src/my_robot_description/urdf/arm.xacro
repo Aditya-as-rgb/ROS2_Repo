@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name = "yellow">
+        <color rgba="0.82 0.96 0 1"/>
+    </material>
+
+    <material name = "orange">
+        <color rgba="1 0.5 0 1"/>
+    </material>
+
+    <link name="base_footprint" />
+
+    <link name="arm_base_link">
+        <visual>
+            <geometry>
+                <box size = "0.1 0.1 0.02" />
+            </geometry>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <material name = "orange" />
+            <!-- collision-->
+             <!-- Inertia-->
+        </visual>
+    </link>
+
+    <link name = "forearm_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.3" />    
+            </geometry>
+            <origin xyz = "0 0 0" rpy = "0 0 0"></origin>
+            <material name = "yellow" />
+        </visual>
+    </link>
+
+    <link name = "hand_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.3" />    
+            </geometry>
+            <origin xyz = "0 0 0" rpy = "0 0 0"></origin>
+            <material name = "orange" />
+        </visual>
+    </link>
+
+    <joint name = "base_joint" type = "fixed" >
+        <parent link="base_footprint" />
+        <child link="arm_base_link" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name = "armbase_forearm_joint" type = "revolute">
+        <parent link = "arm_base_link" />
+        <child link = "forearm_link" />
+        <origin xyz = "0 0 0.15" rpy = "0 0 0" />
+        <limit lower = "${pi/2.0}" upper = "${pi/2.0}" effort = "100" velocity = "100" />
+    </joint>
+
+    <joint name = "forearm_hand_joint" type = "revolute">
+        <parent link="forearm_link"/>
+        <child link="hand_link"/>
+        <origin xyz = "0 0 0.3" rpy = "0 0 0" />
+        <limit lower = "${-pi/2.0}" upper = "${pi/2.0}" effort = "100" velocity = "100"  />
+        <axis xyz = "1 0 0" />
+    </joint>
+
+</robot>
